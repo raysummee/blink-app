@@ -36,40 +36,57 @@ class Blink extends StatelessWidget {
           Card(
             margin: EdgeInsets.all(8),
             child: Container(
-              padding: EdgeInsets.all(16),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Icon(Icons.settings_system_daydream),
-                      SizedBox(width: 8,),
-                      Expanded(
-                        child: Text(
-                          "Connect to PC"
-                        )
-                      )
-                    ],
+                  InkWell(
+                    onTap: (){},
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        children: [
+                          Icon(Icons.settings_system_daydream),
+                          SizedBox(width: 8,),
+                          Expanded(
+                            child: Text(
+                              "Connect to PC"
+                            )
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                   Divider(
-                    color: Colors.black45,
+                    color: Colors.black26,
+                    height: 1,
+                    indent: 16,
+                    endIndent: 16,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Icon(Icons.wifi_sharp, size: 100,),
                   ),
                   Divider(
-                    color: Colors.black45,
+                    color: Colors.black26,
+                    height: 1,
+                    indent: 16,
+                    endIndent: 16,
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.qr_code_2),
-                      SizedBox(width: 8,),
-                      Expanded(
-                        child: Text(
-                          "Scan QR Code"
-                        )
-                      )
-                    ],
+                  InkWell(
+                    onTap: (){},
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        children: [
+                          Icon(Icons.qr_code_2),
+                          SizedBox(width: 8,),
+                          Expanded(
+                            child: Text(
+                              "Scan QR Code"
+                            )
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
