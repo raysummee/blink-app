@@ -38,9 +38,12 @@ class _QrScannerState extends State<QrScanner> {
    void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      if(!scanData.code.contains("blink")) return;
+      if(!scanData.code.contains("address")) return;
+      if(!scanData.code.contains("machine")) return;
+      if(!scanData.code.contains("username")) return;
+      if(!scanData.code.contains("password")) return;
       setState(() {
-        blinkScan =  ModelBlinkScan.fromjson(json.decode(scanData.code)['blink']);
+        blinkScan =  ModelBlinkScan.fromjson(json.decode(scanData.code));
       });
     });     
   }
