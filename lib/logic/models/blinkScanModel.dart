@@ -11,6 +11,6 @@ class BlinkScanModel{
       address: body.containsKey("address")?body['address'].toString():"", 
       username: body.containsKey("username")?body['username'].toString():"", 
       password: body.containsKey("password")?body['password'].toString():""
-    )
+    );
   }
 }
