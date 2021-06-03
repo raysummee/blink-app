@@ -1,3 +1,4 @@
+import 'package:blink_app/screens/qrScanner.dart';
 import 'package:flutter/material.dart';
 
 class ConnectCard extends StatelessWidget {
@@ -11,7 +12,8 @@ class ConnectCard extends StatelessWidget {
         child: Column(
           children: [
             InkWell(
-              onTap: (){},
+              onTap: (){
+              },
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
@@ -44,7 +46,9 @@ class ConnectCard extends StatelessWidget {
               endIndent: 16,
             ),
             InkWell(
-              onTap: (){},
+              onTap: () async {
+                Navigator.of(context).push(MaterialPageRoute(builder: (_)=>QrScanner()));
+              },
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
