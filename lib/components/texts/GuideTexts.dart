@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class GuideTexts extends StatelessWidget {
+  const GuideTexts({ Key? key }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ConnectCard extends StatelessWidget {
+  const ConnectCard({ Key? key }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -14,7 +16,7 @@ class ConnectCard extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
-                    Icon(Icons.settings_system_daydream),
+                    Icon(Icons.computer),
                     SizedBox(width: 8,),
                     Expanded(
                       child: Text(
@@ -32,8 +34,8 @@ class ConnectCard extends StatelessWidget {
               endIndent: 16,
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Icon(Icons.wifi_sharp, size: 100,),
+              padding: const EdgeInsets.symmetric(vertical: 28.0),
+              child: Icon(Icons.connect_without_contact, size: 80, color: Colors.black.withOpacity(0.70),),
             ),
             Divider(
               color: Colors.black26,
