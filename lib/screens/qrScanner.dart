@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:blink_app/logic/models/modelBlinkScan.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -16,9 +17,7 @@ class QrScanner extends StatefulWidget {
 class _QrScannerState extends State<QrScanner> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
-  String? machineName;
-  String? address;
-  String? username;
+  ModelBlinkScan? blinkScan;
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -39,9 +38,11 @@ class _QrScannerState extends State<QrScanner> {
    void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      Map<String, dynamic> scanndedMap = json.decode(scanData.code);
-      print(scanndedMap);
-    });
+      if(!scanData.code.contains("blink")) return;
+      setState(() {
+        blinkScan =  ModelBlinkScan.fromjson(json.decode(scanData.code)['blink']);
+      });
+    });     
   }
 
   @override
@@ -81,11 +82,15 @@ class _QrScannerState extends State<QrScanner> {
                         borderRadius: BorderRadius.circular(15)
                       )
                     ),
-                    onPressed: null,
+                    onPressed: blinkScan == null?null:(){},
                     child: Text("Continue"),
                   ),
                   SizedBox(height: 16,),
-                  Text('Scan the QR code'),
+                  Text(
+                    blinkScan == null?
+                    'Scan the QR code':
+                    "Connect to ${blinkScan!.machine}"
+                  ),
                 ],
               ),
             )

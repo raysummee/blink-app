@@ -1,12 +1,12 @@
-class BlinkScanModel{
+class ModelBlinkScan{
   late String machine;
   late String address;
   late String username;
   late String password;
-  BlinkScanModel({required this.machine, required this.address, required this.username, required this.password});
+  ModelBlinkScan({required this.machine, required this.address, required this.username, required this.password});
 
-  factory BlinkScanModel.fromjson(Map<String, dynamic> body){
-    return BlinkScanModel(
+  factory ModelBlinkScan.fromjson(Map<String, dynamic> body){
+    return ModelBlinkScan(
       machine: body.containsKey("machine")?body['machine'].toString():"Machine", 
       address: body.containsKey("address")?body['address'].toString():"", 
       username: body.containsKey("username")?body['username'].toString():"", 
