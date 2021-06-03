@@ -1,4 +1,5 @@
 import 'package:blink_app/components/Cards/ConnectCard.dart';
+import 'package:blink_app/components/buttons/cardButton.dart';
 import 'package:blink_app/components/texts/GuideTexts.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
 }
 
 class Blink extends StatelessWidget {
+  const Blink({ Key? key }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +39,20 @@ class Blink extends StatelessWidget {
       body: Column(
         children: [
           ConnectCard(),
-          GuideTexts()
+          CardButton(
+            label: "Settings",
+            icon: Icons.settings,
+            func: (){},
+          ),
+          CardButton(
+            label: "Controller",
+            icon: Icons.gamepad_outlined,
+            func: (){},
+          ),
+          SizedBox(height:8,),
+          GuideTexts(),
         ],
       ),
     );
   }
-
 }
