@@ -9,16 +9,15 @@ import 'package:path_provider/path_provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Db.init(await getApplicationDocumentsDirectory());
-  runApp(MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
+class App extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _AppState createState() => _AppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
