@@ -1,3 +1,4 @@
+import 'package:blink_app/logic/helper/HelperBlinkScan.dart';
 import 'package:blink_app/screens/qrScanner.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class ConnectCard extends StatelessWidget {
                     SizedBox(width: 8,),
                     Expanded(
                       child: Text(
-                        "Connect to PC"
+                        "Connect to last logged"
                       )
                     )
                   ],
@@ -35,9 +36,32 @@ class ConnectCard extends StatelessWidget {
               indent: 16,
               endIndent: 16,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 28.0),
-              child: Icon(Icons.connect_without_contact, size: 80, color: Colors.black.withOpacity(0.70),),
+            Container(
+              height: 160,
+              child: StreamBuilder<void>(
+                stream: HelperBlinkScan().listen(),
+                builder: (context, snapshot) {
+                  return AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: HelperBlinkScan().readAll().isEmpty? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.connect_without_contact, 
+                          size: 80, 
+                          color: Colors.black.withOpacity(0.70),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          "No saved connection"
+                        )
+                      ],
+                    ):Text("Some connection are saved!"),
+                  );
+                }
+              ),
             ),
             Divider(
               color: Colors.black26,
