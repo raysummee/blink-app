@@ -1,14 +1,24 @@
 import 'package:blink_app/components/Cards/ConnectCard.dart';
 import 'package:blink_app/components/buttons/cardButton.dart';
 import 'package:blink_app/components/texts/GuideTexts.dart';
+import 'package:blink_app/db/db.dart';
+import 'package:blink_app/screens/homePage.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  Db.init(await getApplicationDocumentsDirectory());
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,39 +30,12 @@ class MyApp extends StatelessWidget {
           elevation: 1
         )
       ),
-      home: Blink(),
+      home: HomePage(),
     );
   }
-}
-
-class Blink extends StatelessWidget {
-  const Blink({ Key? key }) : super(key: key);
-
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Blink"
-        ),
-      ),
-      body: Column(
-        children: [
-          ConnectCard(),
-          CardButton(
-            label: "Settings",
-            icon: Icons.settings,
-            func: (){},
-          ),
-          CardButton(
-            label: "Controller",
-            icon: Icons.gamepad_outlined,
-            func: (){},
-          ),
-          SizedBox(height:8,),
-          GuideTexts(),
-        ],
-      ),
-    );
+  void dispose() {
+    Db.dispose();
+    super.dispose();
   }
 }
