@@ -58,7 +58,7 @@ class _QrScannerState extends State<QrScanner> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "QR Scanner"
+          "Scan QR Code"
         ),
       ),
       body: SafeArea(
@@ -69,7 +69,9 @@ class _QrScannerState extends State<QrScanner> {
               child: QRView(
                 key: qrKey,
                 overlay: QrScannerOverlayShape(
-                  borderRadius: 10
+                  borderRadius: 10,
+                  borderColor: Colors.white,
+                  overlayColor: blinkScan==null?const Color.fromRGBO(0, 0, 0, 80): Colors.green.withOpacity(0.8)
                 ),
                 onQRViewCreated: _onQRViewCreated,
               ),
@@ -94,6 +96,7 @@ class _QrScannerState extends State<QrScanner> {
                     'Scan the QR code':
                     "Connect to ${blinkScan!.machine}"
                   ),
+                  SizedBox(height: 8,),
                 ],
               ),
             )
