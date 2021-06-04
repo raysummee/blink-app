@@ -1,6 +1,7 @@
 import 'package:blink_app/components/buttons/cardButton.dart';
 import 'package:blink_app/components/cards/ConnectCard.dart';
 import 'package:blink_app/components/texts/GuideTexts.dart';
+import 'package:blink_app/logic/helper/HelperBlinkScan.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,10 +23,15 @@ class HomePage extends StatelessWidget {
             icon: Icons.settings,
             func: (){},
           ),
-          CardButton(
-            label: "Controller",
-            icon: Icons.gamepad_outlined,
-            func: (){},
+          StreamBuilder<void>(
+            stream: HelperBlinkScan().listen(),
+            builder: (context, snapshot) {
+              return CardButton(
+                label: "Controller",
+                icon: Icons.gamepad_outlined,
+                func: HelperBlinkScan().read()!=null?(){}:null,
+              );
+            }
           ),
           SizedBox(height:8,),
           GuideTexts(),

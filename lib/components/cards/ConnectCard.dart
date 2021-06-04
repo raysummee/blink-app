@@ -17,7 +17,7 @@ class ConnectCard extends StatelessWidget {
             return Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: true? null:(){
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -27,7 +27,12 @@ class ConnectCard extends StatelessWidget {
                         SizedBox(width: 8,),
                         Expanded(
                           child: Text(
-                            "Connect to last logged"
+                            ((){
+                              if(HelperBlinkScan().read()!=null){
+                                return "Connected to ${HelperBlinkScan().read()!.address}";
+                              }
+                              return "No connection";
+                            }())
                           )
                         )
                       ],
