@@ -1,4 +1,8 @@
+import 'package:objectbox/objectbox.dart';
+
+@Entity()
 class ModelBlinkScan{
+  late int id;
   late String machine;
   late String address;
   late String username;
