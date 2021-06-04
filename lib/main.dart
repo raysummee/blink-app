@@ -6,9 +6,16 @@ import 'package:blink_app/screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'logic/helper/HelperBlinkScan.dart';
+
+
+late GlobalKey<NavigatorState> navigatorKey;
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  navigatorKey = new GlobalKey<NavigatorState>();
   Db.init(await getApplicationDocumentsDirectory());
+  HelperBlinkScan().deleteAll();
   runApp(App());
 }
 
@@ -22,6 +29,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Blink',
+      navigatorKey: navigatorKey,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         primaryColor: Colors.white,
