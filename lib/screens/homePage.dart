@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
             func: (){},
           ),
           CardButton(
-            label: HelperBlinkScan().readAll().toString(),
+            label: "Controller",
             icon: Icons.gamepad_outlined,
             func: (){},
           ),
