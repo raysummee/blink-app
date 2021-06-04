@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:blink_app/logic/helper/HelperBlinkScan.dart';
+import 'package:blink_app/logic/helper/HelperBlinkScanSave.dart';
 import 'package:blink_app/logic/models/modelBlinkScan.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,7 @@ class _QrScannerState extends State<QrScanner> {
                       )
                     ),
                     onPressed: blinkScan == null?null:(){
+                      HelperBlinkScanSaved().putScan(blinkScan!);
                       HelperBlinkScan().putOne(blinkScan!);
                       Navigator.of(context).pop();
                     },
