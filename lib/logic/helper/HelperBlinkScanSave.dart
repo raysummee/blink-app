@@ -13,6 +13,14 @@ class HelperBlinkScanSaved{
     Db.store!.box<ModelBlinkScanSaved>().removeAll();
   }
 
+  ModelBlinkScanSaved? latest(){
+    Box<ModelBlinkScanSaved> box = Db.store!.box<ModelBlinkScanSaved>();
+    final query = box.query(ModelBlinkScanSaved_.updatedOn.between(DateTime.now().subtract(Duration(days: 30)).millisecondsSinceEpoch, DateTime.now().millisecondsSinceEpoch)).build();
+    List<ModelBlinkScanSaved> list = query.find();
+    query.close();
+    return  list.isNotEmpty? list.last: null;
+  }
+
   void putScan(ModelBlinkScan blinkScan){
     Box<ModelBlinkScanSaved> box = Db.store!.box<ModelBlinkScanSaved>();
     final query = box.query(ModelBlinkScanSaved_.machine.equals(blinkScan.machine)).build();
