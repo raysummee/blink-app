@@ -1,7 +1,10 @@
 import 'package:blink_app/logic/helper/HelperBlinkScan.dart';
+import 'package:blink_app/logic/helper/HelperBlinkScanSave.dart';
+import 'package:blink_app/logic/models/modelBlinkScan.dart';
 import 'package:blink_app/screens/qrScanner.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/iconic_icons.dart';
+import 'package:intl/intl.dart';
 
 class ConnectCard extends StatelessWidget {
   const ConnectCard({ Key? key }) : super(key: key);
@@ -17,7 +20,16 @@ class ConnectCard extends StatelessWidget {
             return Column(
               children: [
                 InkWell(
-                  onTap: true? null:(){
+                  onTap: HelperBlinkScanSaved().readAll().isEmpty? null:(){
+                    var blinkScanSaved = HelperBlinkScanSaved().readAll().last;
+                    var blinkScanActive = ModelBlinkScan(
+                      id: blinkScanSaved.id, 
+                      machine: blinkScanSaved.machine,
+                      address: blinkScanSaved.address, 
+                      username: blinkScanSaved.username, 
+                      password: blinkScanSaved.password
+                    );
+                    HelperBlinkScan().putOne(blinkScanActive);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -26,13 +38,20 @@ class ConnectCard extends StatelessWidget {
                         Icon(Icons.computer),
                         SizedBox(width: 8,),
                         Expanded(
-                          child: Text(
-                            ((){
-                              if(HelperBlinkScan().read()!=null){
-                                return "Connected to ${HelperBlinkScan().read()!.address}";
-                              }
-                              return "No connection";
-                            }())
+                          child: StreamBuilder<void>(
+                            stream: HelperBlinkScanSaved().listen(),
+                            builder: (context, snapshot) {
+                              return Text(
+                                ((){
+                                  if(HelperBlinkScan().read()!=null){
+                                    return "Connected to ${HelperBlinkScan().read()!.address}";
+                                  }else if(HelperBlinkScanSaved().latest()!=null){
+                                    return "Connect to recent (${DateFormat("dd MMM").format(HelperBlinkScanSaved().latest()!.updatedOn)})";
+                                  }
+                                  return "No connection";
+                                }())
+                              );
+                            }
                           )
                         )
                       ],
