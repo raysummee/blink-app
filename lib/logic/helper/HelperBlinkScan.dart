@@ -1,19 +1,16 @@
-
 import 'package:blink_app/db/db.dart';
 import 'package:blink_app/logic/models/modelBlinkScan.dart';
-import 'package:blink_app/objectbox.g.dart';
 import 'package:objectbox/objectbox.dart';
 
 class HelperBlinkScan{
-  List<ModelBlinkScan> readAll(){
-    return Db.store!.box<ModelBlinkScan>().getAll();
+  ModelBlinkScan? read(){
+    return Db.store!.box<ModelBlinkScan>().get(1);
   }
 
   void deleteAll(){
     Db.store!.box<ModelBlinkScan>().removeAll();
   }
 
-  //if id == 0, add new, else will update existing
   void putOne(ModelBlinkScan blinkScan){
     Db.store!.box<ModelBlinkScan>().put(blinkScan);
   }

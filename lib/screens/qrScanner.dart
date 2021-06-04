@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:blink_app/logic/helper/HelperBlinkScan.dart';
 import 'package:blink_app/logic/models/modelBlinkScan.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,10 @@ class _QrScannerState extends State<QrScanner> {
                         borderRadius: BorderRadius.circular(15)
                       )
                     ),
-                    onPressed: blinkScan == null?null:(){},
+                    onPressed: blinkScan == null?null:(){
+                      HelperBlinkScan().putOne(blinkScan!);
+                      Navigator.of(context).pop();
+                    },
                     child: Text("Continue"),
                   ),
                   SizedBox(height: 16,),

@@ -1,6 +1,7 @@
 import 'package:blink_app/logic/helper/HelperBlinkScan.dart';
 import 'package:blink_app/screens/qrScanner.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/iconic_icons.dart';
 
 class ConnectCard extends StatelessWidget {
   const ConnectCard({ Key? key }) : super(key: key);
@@ -10,40 +11,41 @@ class ConnectCard extends StatelessWidget {
     return Card(
       margin: EdgeInsets.all(8),
       child: Container(
-        child: Column(
-          children: [
-            InkWell(
-              onTap: (){
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Icon(Icons.computer),
-                    SizedBox(width: 8,),
-                    Expanded(
-                      child: Text(
-                        "Connect to last logged"
-                      )
-                    )
-                  ],
+        child: StreamBuilder<void>(
+          stream: HelperBlinkScan().listen(),
+          builder: (context, snapshot) {
+            return Column(
+              children: [
+                InkWell(
+                  onTap: (){
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Icon(Icons.computer),
+                        SizedBox(width: 8,),
+                        Expanded(
+                          child: Text(
+                            "Connect to last logged"
+                          )
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Divider(
-              color: Colors.black26,
-              height: 1,
-              indent: 16,
-              endIndent: 16,
-            ),
-            Container(
-              height: 160,
-              child: StreamBuilder<void>(
-                stream: HelperBlinkScan().listen(),
-                builder: (context, snapshot) {
-                  return AnimatedSwitcher(
+                Divider(
+                  color: Colors.black26,
+                  height: 1,
+                  indent: 16,
+                  endIndent: 16,
+                ),
+                Container(
+                  height: 160,
+                  child: AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
-                    child: HelperBlinkScan().readAll().isEmpty? Column(
+                    child: HelperBlinkScan().read() == null? Column(
+                      key: ValueKey<int>(0),
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
@@ -55,40 +57,67 @@ class ConnectCard extends StatelessWidget {
                           height: 4,
                         ),
                         Text(
-                          "No saved connection"
+                          "Scan QR Code to continue"
                         )
                       ],
-                    ):Text("Some connection are saved!"),
-                  );
-                }
-              ),
-            ),
-            Divider(
-              color: Colors.black26,
-              height: 1,
-              indent: 16,
-              endIndent: 16,
-            ),
-            InkWell(
-              onTap: () async {
-                Navigator.of(context).push(MaterialPageRoute(builder: (_)=>QrScanner()));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Icon(Icons.qr_code_2),
-                    SizedBox(width: 8,),
-                    Expanded(
-                      child: Text(
-                        "Scan QR Code"
-                      )
+                    ):
+                    Column(
+                      key: ValueKey<int>(1),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.connected_tv, 
+                          size: 80, 
+                          color: Colors.black.withOpacity(0.70),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          "${HelperBlinkScan().read()!.machine}"
+                        ),
+                        SizedBox(
+                          height: 2,
+                        ),
+                        Text(
+                          "${HelperBlinkScan().read()!.address}"
+                        )
+                      ],
                     )
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ],
+                Divider(
+                  color: Colors.black26,
+                  height: 1,
+                  indent: 16,
+                  endIndent: 16,
+                ),
+                InkWell(
+                  onTap: () async {
+                    if(HelperBlinkScan().read() != null){
+                      HelperBlinkScan().deleteAll();
+                      return;
+                    }
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_)=>QrScanner()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Icon(HelperBlinkScan().read()==null?Icons.qr_code_2:Icons.signal_wifi_connected_no_internet_4_rounded),
+                        SizedBox(width: 8,),
+                        Expanded(
+                          child: Text(
+                            HelperBlinkScan().read()==null?"Scan QR Code":"Disconnect"
+                          )
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
         ),
       ),
     );
