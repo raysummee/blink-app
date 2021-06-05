@@ -42,8 +42,7 @@ class _QrScannerState extends State<QrScanner> {
     controller.scannedDataStream.listen((scanData) {
       if(!scanData.code.contains("address")) return;
       if(!scanData.code.contains("machine")) return;
-      if(!scanData.code.contains("username")) return;
-      if(!scanData.code.contains("password")) return;
+      if(!scanData.code.contains("token")) return;
       setState(() {
         blinkScan =  ModelBlinkScan.fromjson(json.decode(scanData.code));
       });
