@@ -9,15 +9,16 @@ class PlaybackApi{
     ModelBlinkScan? blinkScan = HelperBlinkScan().read();
     String host = blinkScan!.address;
     Map<String, String> headers = new Map();
-    headers["Authorization"] = 'Basic ${blinkScan.token}';
-
-    Uri url = Uri.parse("$host/playback");
-    http.post(
+    headers["Authorization"] = 'Bearer ${blinkScan.token}';
+    headers["Content-Type"] = "application/json";
+    Uri url = Uri.http("$host:5000", "playback");
+    http.Response response  = await http.post(
       url,
       headers: headers,
       body: json.encode({
         "command": command
       }),
     );
+    print(response.body);
   }
 }
