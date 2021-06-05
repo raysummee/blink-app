@@ -30,6 +30,7 @@ dependencies:
   path_provider: ^2.0.2
   fluttericon: ^2.0.0
   intl: ^0.17.0
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:
