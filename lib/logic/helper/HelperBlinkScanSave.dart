@@ -32,16 +32,14 @@ class HelperBlinkScanSaved{
       blinkScanSaved.updatedOn = DateTime.now();
       blinkScanSaved.address =  blinkScan.address;
       blinkScanSaved.crashed = false;
-      blinkScanSaved.username = blinkScan.username;
-      blinkScanSaved.password = blinkScan.password;
+      blinkScanSaved.token = blinkScan.token;
       box.put(blinkScanSaved);
     }else{
       //add new
       ModelBlinkScanSaved blinkScanSaved =  ModelBlinkScanSaved(
         machine: blinkScan.machine, 
         address: blinkScan.address, 
-        username: blinkScan.username, 
-        password: blinkScan.password, 
+        token: blinkScan.token,
         createdOn: DateTime.now(), 
         updatedOn: DateTime.now()
       );

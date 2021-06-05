@@ -5,8 +5,7 @@ class ModelBlinkScanSaved{
   int id=0;
   late String machine;
   late String address;
-  late String username;
-  late String password;
+  late String token;
   @Property(type: PropertyType.date)
   late DateTime createdOn;
   @Property(type: PropertyType.date)
@@ -16,8 +15,7 @@ class ModelBlinkScanSaved{
   ModelBlinkScanSaved({
     required this.machine,
     required this.address,
-    required this.username,
-    required this.password,
+    required this.token,
     this.crashed:false,
     required this.createdOn,
     required this.updatedOn

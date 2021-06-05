@@ -26,8 +26,7 @@ class ConnectCard extends StatelessWidget {
                       id: blinkScanSaved.id, 
                       machine: blinkScanSaved.machine,
                       address: blinkScanSaved.address, 
-                      username: blinkScanSaved.username, 
-                      password: blinkScanSaved.password
+                      token: blinkScanSaved.token,
                     );
                     HelperBlinkScan().putOne(blinkScanActive);
                   },
