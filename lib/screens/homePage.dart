@@ -2,6 +2,7 @@ import 'package:blink_app/components/buttons/cardButton.dart';
 import 'package:blink_app/components/cards/ConnectCard.dart';
 import 'package:blink_app/components/texts/GuideTexts.dart';
 import 'package:blink_app/logic/helper/HelperBlinkScan.dart';
+import 'package:blink_app/screens/playbackControllerPage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -29,7 +30,11 @@ class HomePage extends StatelessWidget {
               return CardButton(
                 label: "Controller",
                 icon: Icons.gamepad_outlined,
-                func: HelperBlinkScan().read()!=null?(){}:null,
+                func: HelperBlinkScan().read()!=null?(){
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_)=>PlaybackControllerPage())
+                  );
+                }:null,
               );
             }
           ),
