@@ -15,6 +15,10 @@ class PlaybackControllerPage extends StatelessWidget {
         title: Text(
           "Playback Control"
         ),
+
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.swap_horizontal_circle_sharp))
+        ],
       ),
       body: Column(
         children: [
