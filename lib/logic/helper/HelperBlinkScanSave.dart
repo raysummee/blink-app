@@ -28,25 +28,33 @@ class HelperBlinkScanSaved{
       //update
       ModelBlinkScanSaved? blinkScanSaved = query.findFirst();
       query.close();
-      print(blinkScanSaved!.id);
-      blinkScanSaved.updatedOn = DateTime.now();
-      blinkScanSaved.address =  blinkScan.address;
-      blinkScanSaved.crashed = false;
-      blinkScanSaved.token = blinkScan.token;
-      box.put(blinkScanSaved);
+      update(blinkScanSaved!, blinkScan);
     }else{
       //add new
-      ModelBlinkScanSaved blinkScanSaved =  ModelBlinkScanSaved(
-        machine: blinkScan.machine, 
-        address: blinkScan.address, 
-        token: blinkScan.token,
-        createdOn: DateTime.now(), 
-        updatedOn: DateTime.now()
-      );
-      box.put(blinkScanSaved);
+      addNew(blinkScan);
     }
   }
 
+  void update(ModelBlinkScanSaved blinkScanSaved, ModelBlinkScan blinkScan){
+    Box<ModelBlinkScanSaved> box = Db.store!.box<ModelBlinkScanSaved>();
+    blinkScanSaved.updatedOn = DateTime.now();
+    blinkScanSaved.address =  blinkScan.address;
+    blinkScanSaved.crashed = false;
+    blinkScanSaved.token = blinkScan.token;
+    box.put(blinkScanSaved);
+  }
+  
+  void addNew(ModelBlinkScan blinkScan){
+    Box<ModelBlinkScanSaved> box = Db.store!.box<ModelBlinkScanSaved>();
+    ModelBlinkScanSaved blinkScanSaved =  ModelBlinkScanSaved(
+      machine: blinkScan.machine, 
+      address: blinkScan.address, 
+      token: blinkScan.token,
+      createdOn: DateTime.now(), 
+      updatedOn: DateTime.now()
+    );
+    box.put(blinkScanSaved);
+  }
   //only will tigger but stream will not have any value
   Stream listen(){
     return Db.store!.watch<ModelBlinkScanSaved>();
