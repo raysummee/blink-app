@@ -52,7 +52,7 @@ class PlaybackControllerPage extends StatelessWidget {
                           SizedBox(height: 8,),
                           Text(
                             index<length?
-                              "${HelperCustomCommand().get(index)!.commandName}":
+                              "${HelperCustomCommand().get(index+1)!.commandName}":
                               "Add",
                             style: TextStyle(
                               fontSize: 18,
