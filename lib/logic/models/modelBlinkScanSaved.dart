@@ -3,14 +3,14 @@ import 'package:objectbox/objectbox.dart';
 @Entity()
 class ModelBlinkScanSaved{
   int id=0;
-  late String machine;
-  late String address;
-  late String token;
+  String machine;
+  String address;
+  String token;
   @Property(type: PropertyType.date)
-  late DateTime createdOn;
+  DateTime createdOn;
   @Property(type: PropertyType.date)
-  late DateTime updatedOn;
-  late bool crashed;
+  DateTime updatedOn;
+  bool crashed;
 
   ModelBlinkScanSaved({
     required this.machine,

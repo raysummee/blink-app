@@ -3,10 +3,10 @@ import 'package:objectbox/objectbox.dart';
 @Entity()
 class ModelBlinkScan{
   @Id(assignable: true)
-  late int id;
-  late String machine;
-  late String address;
-  late String token;
+  int id;
+  String machine;
+  String address;
+  String token;
   ModelBlinkScan({required this.id, required this.machine, required this.address, required this.token});
 
   factory ModelBlinkScan.fromjson(Map<String, dynamic> body){
