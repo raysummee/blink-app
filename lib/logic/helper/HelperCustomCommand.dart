@@ -17,9 +17,19 @@ class HelperCustomCommand{
     box.remove(id);
   }
 
-  List<ModelCustomCommand>? getAll(){
+  List<ModelCustomCommand> getAll(){
     Box<ModelCustomCommand> box = Db.store!.box<ModelCustomCommand>();
     return box.getAll();
+  }
+
+  int count(){
+    Box<ModelCustomCommand> box = Db.store!.box<ModelCustomCommand>();
+    return box.count();
+  }
+
+  ModelCustomCommand? get(int id){
+    Box<ModelCustomCommand> box = Db.store!.box<ModelCustomCommand>();
+    return box.get(id);
   }
 
 }
