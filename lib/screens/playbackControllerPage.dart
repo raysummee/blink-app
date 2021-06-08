@@ -57,11 +57,11 @@ class PlaybackControllerPage extends StatelessWidget {
               ),
             )
           ),
-          Card(
+          Material(
+            color: Colors.white,
             child: SafeArea(
               child: Container(
-                padding: EdgeInsets.only(top: 16),
-                color: Colors.white,
+                padding: EdgeInsets.symmetric(vertical: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
