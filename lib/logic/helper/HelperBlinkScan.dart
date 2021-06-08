@@ -12,6 +12,9 @@ class HelperBlinkScan{
   }
 
   void putOne(ModelBlinkScan blinkScan){
+    if(blinkScan.address.isEmpty) return;
+    if(blinkScan.machine.isEmpty) return;
+    if(blinkScan.token.isEmpty) return;
     Db.store!.box<ModelBlinkScan>().put(blinkScan);
   }
 
