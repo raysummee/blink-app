@@ -1,7 +1,7 @@
 import 'package:blink_app/logic/api/playbackApi.dart';
+import 'package:blink_app/logic/helper/HelperCustomCommand.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttericon/iconic_icons.dart';
 
 class PlaybackControllerPage extends StatelessWidget {
   const PlaybackControllerPage({ Key? key }) : super(key: key);
@@ -27,33 +27,43 @@ class PlaybackControllerPage extends StatelessWidget {
               padding: EdgeInsets.all(16),
               alignment: Alignment.center,
               color: Color(0xfffafafa),
-              child: GridView.builder(
-                itemCount: 5,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
-                itemBuilder: (context, index) => Card(
-                  elevation: 4,
-                  shadowColor: Colors.black.withOpacity(0.2),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "${index+1}",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600
-                        ),
+              child: StreamBuilder<void>(
+                stream: HelperCustomCommand().listen(),
+                builder: (context, snapshot) {
+                  int length = HelperCustomCommand().count();
+                  return GridView.builder(
+                    itemCount: length+1,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
+                    itemBuilder: (context, index) => Card(
+                      elevation: 4,
+                      shadowColor: Colors.black.withOpacity(0.2),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          index<length? 
+                            Text(
+                              "${index+1}",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600
+                              ),
+                            ):
+                            Icon(Icons.add),
+                          SizedBox(height: 8,),
+                          Text(
+                            index<length?
+                              "${HelperCustomCommand().get(index)!.commandName}":
+                              "Add",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 8,),
-                      Text(
-                        "Play",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600
-                        ),
-                      ),
-                    ],
-                  ),
-                )
+                    )
+                  );
+                }
               ),
             )
           ),
