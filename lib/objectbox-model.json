@@ -75,9 +75,48 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:3850284421623260902",
+      "lastPropertyId": "6:3959219115883354059",
+      "name": "ModelCustomCommand",
+      "properties": [
+        {
+          "id": "1:2954636696768564152",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1921475103555918560",
+          "name": "commandName",
+          "type": 9
+        },
+        {
+          "id": "3:8935609205003495976",
+          "name": "command",
+          "type": 9
+        },
+        {
+          "id": "4:5959348947929231821",
+          "name": "createdOn",
+          "type": 10
+        },
+        {
+          "id": "5:4359263430114973558",
+          "name": "updatedOn",
+          "type": 10
+        },
+        {
+          "id": "6:3959219115883354059",
+          "name": "deleted",
+          "type": 1
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:7366266894278115388",
+  "lastEntityId": "4:3850284421623260902",
   "lastIndexId": "2:4124878868515519175",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
